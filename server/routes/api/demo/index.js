@@ -1,14 +1,15 @@
 //NPM
 const express = require('express')
 const router = express.Router()
+const db = require('../../../database/mysql')
 
 //Routes
 router.get('/', (req, res) => {
-  const demo = {
-    title: 'Welcome to Express, Nerrrrd!',
-    body: 'This is some example data coming from the Express Server'
-  }
-  res.json(demo)
+  const sql = 'SELECT * FROM posts'
+  db.query(sql, (err, result) => {
+    if(err) throw err
+    res.json(result)
+  })
 })
 
 module.exports = router

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux';
 import { getDemo } from '../../store/actions/demo'
@@ -7,11 +7,11 @@ class Demo extends Component {
 
   static propTypes = {
     getDemo: PropTypes.func.isRequired,
-    demo: PropTypes.object.isRequired
+    demo: PropTypes.array.isRequired
   }
 
   static defaultProps = {
-    demo: {}
+    demo: []
   }
 
   componentWillMount() {
@@ -21,10 +21,16 @@ class Demo extends Component {
   render() {
 
     return (
-      <div style={{textAlign: 'center'}}>
-        <h1>{this.props.demo.title}</h1>
-        <p>{this.props.demo.body}</p>  
-      </div>
+      <Fragment>
+        {this.props.demo.map((item, index) => {
+          return (
+            <div key={index} style={{textAlign: 'center'}}>
+              <h1>{item.title}</h1>
+              <p>{item.body}</p>  
+            </div>
+          )
+        })}
+      </Fragment>
     );
   }
 }

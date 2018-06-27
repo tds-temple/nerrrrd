@@ -1,6 +1,6 @@
 import { GET_DEMO } from '../../actions/demo/constants'
 
-const demoReducer = (state = {}, {type, payload}) => {
+const demoReducer = (state = [], {type, payload}) => {
     switch (type) {
       case GET_DEMO:
         return payload
